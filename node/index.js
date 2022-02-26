@@ -4,10 +4,10 @@ const mysql = require("mysql")
 const port = 3000
 
 const config = {
-    host: 'db',
-    user: 'root',
-    password: 'password',
-    database:'nodedb'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME
 };
 const connection = mysql.createConnection(config)
 

@@ -13,6 +13,12 @@ services:
     tty: true
     volumes:
       - ./node:/usr/src/app
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASS=password
+      - DB_NAME=nodedb
+      - DB_PORT=3306
     ports:
       - "3000:3000"
     networks:
