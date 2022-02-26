@@ -1,4 +1,5 @@
 const express = require("express")
+const hoaxer = require('hoaxer')
 const mysql = require("mysql")
 const port = 3000
 
@@ -11,6 +12,10 @@ const config = {
 const connection = mysql.createConnection(config)
 
 async function buildPeopleRepository() {
+  const insertName = async (name) => {
+    await query(`INSERT INTO people (name) VALUES ('${name}')`)
+  }
+
   const listNames = async () => {
     const data = await query('SELECT name FROM people')
 
@@ -29,12 +34,15 @@ async function buildPeopleRepository() {
     })
   }
 
-  return { listNames, query }
+  return { insertName, listNames, query }
 }
 
 async function buildApp(repository) {
   const app = express()
     .get('/', async (_, res) => {
+      const name = hoaxer.name.findName();
+      await repository.insertName(name);
+
       const names = await repository.listNames()
 
       res.send(`
