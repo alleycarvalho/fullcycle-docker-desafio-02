@@ -1,0 +1,19 @@
+version: '3'
+
+networks:
+  node-network:
+    driver: bridge
+
+services:
+  app:
+    build:
+      context: node
+    container_name: app
+    restart: always
+    tty: true
+    volumes:
+      - ./node:/usr/src/app
+    ports:
+      - "3000:3000"
+    networks:
+      - node-network
