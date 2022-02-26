@@ -20,5 +20,5 @@ docker-compose up -d
 Acessar a aplicação no endereço:
 
 ```
-http://localhost
+http://localhost:8080
 ```
